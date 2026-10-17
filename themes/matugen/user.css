@@ -1,0 +1,140 @@
+/*
+ * Matugen Dynamic Theme for Spicetify
+ * Material Design 3 (Material You) color mapping for Spotify
+ * Focus: Pure color adaptation without layout disruption
+ */
+
+:root {
+  /* Spotify XPUI Semantic Color Tokens */
+  --background-base: var(--spice-main) !important;
+  --background-highlight: var(--spice-main-secondary) !important;
+  --background-press: var(--spice-card) !important;
+  --background-elevated-base: var(--spice-sidebar) !important;
+  --background-elevated-highlight: var(--spice-card) !important;
+  --background-elevated-press: var(--spice-button-active) !important;
+  --background-tinted-base: var(--spice-main) !important;
+  --background-tinted-highlight: var(--spice-card) !important;
+  --background-tinted-press: var(--spice-button-active) !important;
+  --background-unsafe-for-small-text: var(--spice-main) !important;
+
+  /* Typography Colors */
+  --text-base: var(--spice-text) !important;
+  --text-subdued: var(--spice-subtext) !important;
+  --text-bright-accent: var(--spice-button) !important;
+  --text-negative: var(--spice-notification-error) !important;
+  --text-warning: var(--spice-misc) !important;
+  --text-positive: var(--spice-button) !important;
+  --text-announcement: var(--spice-text) !important;
+
+  /* Interactive Elements */
+  --essential-base: var(--spice-text) !important;
+  --essential-subdued: var(--spice-subtext) !important;
+  --essential-bright-accent: var(--spice-button) !important;
+  --essential-negative: var(--spice-notification-error) !important;
+  --essential-warning: var(--spice-misc) !important;
+  --essential-positive: var(--spice-button) !important;
+  --essential-announcement: var(--spice-button) !important;
+
+  /* Decorative Elements */
+  --decorative-base: var(--spice-text) !important;
+  --decorative-subdued: var(--spice-card) !important;
+}
+
+/* Main Container and Surface */
+.Root__top-container {
+  background-color: var(--spice-main) !important;
+}
+
+/* Sidebar / Library Navigation */
+.Root__nav-bar,
+.main-yourLibraryX-entryPoints {
+  background-color: var(--spice-sidebar) !important;
+}
+
+/* Bottom Player Bar */
+.Root__now-playing-bar,
+.main-nowPlayingBar-container {
+  background-color: var(--spice-player) !important;
+  border-top: 1px solid var(--spice-main-secondary);
+}
+
+/* Right Sidebar (Friend activity / Now playing details) */
+.Root__right-sidebar {
+  background-color: var(--spice-sidebar) !important;
+}
+
+/* Top Bar and Header */
+.main-topBar-background {
+  background-color: var(--spice-main) !important;
+}
+
+.main-topBar-overlay {
+  background-color: var(--spice-main) !important;
+}
+
+/* Cards and Grid Items */
+.main-card-card {
+  background-color: var(--spice-card) !important;
+  transition: background-color 0.2s ease;
+}
+
+.main-card-card:hover,
+.main-card-card[data-context-menu-open="true"] {
+  background-color: var(--spice-main-secondary) !important;
+}
+
+/* Tracklist rows */
+.main-trackList-trackListRow:hover {
+  background-color: rgba(var(--spice-rgb-card), 0.6) !important;
+}
+
+.main-trackList-trackListRow.main-trackList-active:hover,
+.main-trackList-trackListRow.main-trackList-active {
+  background-color: var(--spice-selected-row) !important;
+}
+
+.main-trackList-trackListRow.main-trackList-active .main-trackList-rowTitle,
+.main-trackList-trackListRow.main-trackList-active .main-trackList-rowMarker {
+  color: var(--spice-button) !important;
+}
+
+/* Play buttons */
+.main-playButton-PlayButton.main-playButton-primary,
+.main-playPauseButton-button {
+  background-color: var(--spice-button) !important;
+  color: var(--spice-main) !important;
+}
+
+.main-playButton-PlayButton.main-playButton-primary:hover,
+.main-playPauseButton-button:hover {
+  transform: scale(1.04);
+  background-color: var(--spice-button-active) !important;
+}
+
+/* Progress bar & volume slider */
+.x-progressBar-fillColor {
+  background-color: var(--spice-button) !important;
+}
+
+.x-progressBar-progressBarBg {
+  background-color: var(--spice-button-disabled) !important;
+}
+
+/* Search bar input */
+.x-searchInput-searchInputInput {
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border-color: var(--spice-misc) !important;
+}
+
+/* Context Menus and Dropdowns */
+.main-contextMenu-menu {
+  background-color: var(--spice-card) !important;
+  border: 1px solid var(--spice-misc);
+  box-shadow: 0 4px 16px rgba(var(--spice-rgb-shadow), 0.4);
+}
+
+.main-contextMenu-menuItemButton:hover {
+  background-color: var(--spice-main-secondary) !important;
+  color: var(--spice-button) !important;
+}
