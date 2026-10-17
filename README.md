@@ -36,3 +36,17 @@ ln -sfn "$HOME/Workspace/personal/spicetify/apps/<nombre-app>" "$HOME/.config/sp
 spicetify config custom_apps <nombre-app>
 spicetify apply
 ```
+
+---
+
+## Extensiones Disponibles
+
+### Topbar Actions (`extensions/topbar-actions.js`)
+
+* **Descripcion:** Reubica los botones de utilidad de Spicetify a la derecha de la barra superior (`.main-actionButtons`) y restaura el icono oficial interactivo de Marketplace.
+* **Caracteristicas:**
+  * Reubicacion automatica del boton de Spicetify (tanto para avisos de actualizacion como boton informativo persistente).
+  * Icono SVG de Marketplace que conmuta la ruta `/marketplace` con retorno inteligente (`goBack()`).
+  * Indicador de estado activo cuando se navega dentro del Marketplace.
+  * Observador de mutaciones para asegurar persistencia tras navegaciones internas en Spotify XPUI.
+

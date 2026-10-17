@@ -138,3 +138,22 @@
   background-color: var(--spice-main-secondary) !important;
   color: var(--spice-button) !important;
 }
+
+/* Topbar Action Buttons & Utility Icons */
+.main-topBar-button,
+.main-actionButtons button {
+  color: var(--spice-subtext) !important;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.main-topBar-button:hover,
+.main-actionButtons button:hover {
+  color: var(--spice-text) !important;
+  transform: scale(1.05);
+}
+
+.main-topBar-button.main-topBar-button-active,
+.main-actionButtons button.main-topBar-button-active {
+  color: var(--spice-button) !important;
+}
+
