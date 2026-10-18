@@ -44,45 +44,18 @@
    1. Ocultar Efectos Dinamicos y Degradados Pesados (Clean View)
    ------------------------------------------------------------- */
 
-/* Eliminar fondos y degradados en Home (debajo de chips: All, Music, Podcasts, Audiobooks) */
-.under-main-view,
-.under-main-view > div,
-.main-home-homeHeader,
-.main-home-homeHeader::before,
-.main-home-homeHeader::after,
-.main-home-content,
-.main-home-content.contentSpacing,
-.main-home-content::before,
-.main-home-content::after,
-.contentSpacing,
-.contentSpacing::before,
-.contentSpacing::after,
-.main-home-filterChipsSection,
-.main-home-filterChipsContainer,
-section[data-testid="home-page"] > div,
-section[data-testid="home-page"]::before,
-section[data-testid="home-page"]::after {
-  background-color: transparent !important;
-  background-image: none !important;
-  background: transparent !important;
-}
-
-/* Neutralizar variables CSS de color extraido y gradientes */
-[style*="--background-base"],
-[style*="--background-noise"],
-[style*="background-color"] {
-  --background-base: var(--spice-main) !important;
-  --background-noise: none !important;
-}
-
-/* Eliminar fondos y degradados dinamicos de cabeceras de album/playlist y perfiles */
+/* Eliminar fondos y degradados dinamicos de cabeceras de album/playlist */
 .main-entityHeader-backgroundColor,
 .main-entityHeader-gradient,
-.main-entityHeader-overlay,
-.main-userProfile-headerBackground {
+.main-entityHeader-overlay {
   background-color: transparent !important;
   background-image: none !important;
-  background: transparent !important;
+}
+
+/* Eliminar degradados del Home detras de chips (All, Music, Podcasts) */
+.main-home-homeHeader,
+.SvIjKUXqrWYDiWZA {
+  display: none !important;
 }
 
 /* Eliminar degradados dinamicos de barras de accion y transiciones */
@@ -90,38 +63,25 @@ section[data-testid="home-page"]::after {
 .main-actionBarBackground-gradient {
   background-color: transparent !important;
   background-image: none !important;
-  background: transparent !important;
 }
 
 /* Eliminar degradados y washes en la vista principal y home */
 .main-home-background,
 .main-view-container__background,
-.main-view-container__scroll-node-child,
 .main-trackList-background,
-.main-trackList-gradientBackground,
 .main-rootlist-rootlistDividerGradient {
   background-image: none !important;
   background-color: transparent !important;
-  background: transparent !important;
-}
-
-/* Forzar contenedor de la vista principal a color solido sin mezclas */
-.main-view-container {
-  background-color: var(--spice-main) !important;
-  background-image: none !important;
 }
 
 /* Barra superior limpia sin blur ni degradados agresivos */
 .main-topBar-background {
   background-color: var(--spice-main) !important;
   background-image: none !important;
-  background: var(--spice-main) !important;
 }
 
 .main-topBar-overlay {
   background-color: var(--spice-main) !important;
-  background-image: none !important;
-  background: var(--spice-main) !important;
 }
 
 /* -------------------------------------------------------------
