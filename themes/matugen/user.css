@@ -84,6 +84,30 @@
   background-image: none !important;
 }
 
+/* Alinear contenedor de acciones (main-actionBar-ActionBar) al fondo limpio */
+.main-actionBar-ActionBar,
+.main-actionBar-ActionBar.contentSpacing,
+.main-actionBar-ActionBarContainer,
+div[class*="main-actionBar-ActionBar"] {
+  background-color: var(--spice-main) !important;
+  background-image: none !important;
+  background: var(--spice-main) !important;
+}
+
+/* Eliminar velos y fades en secciones hijas del main view */
+main > section > div,
+main > div > section > div,
+.main-view-container__scroll-node-child,
+.main-trackList-trackListHeader,
+.main-trackList-trackListHeaderStuck {
+  background-image: none !important;
+}
+
+.main-trackList-trackListHeaderStuck {
+  background-color: var(--spice-main) !important;
+  box-shadow: 0 1px 0 var(--spice-main-secondary) !important;
+}
+
 /* Eliminar degradados y washes en la vista principal y home */
 .main-home-background,
 .main-view-container__background,
