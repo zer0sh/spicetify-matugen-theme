@@ -58,6 +58,25 @@
   display: none !important;
 }
 
+/* Forzar barra de chips al color plano de Matugen sin degradado dinamico */
+.main-home-filterChipsSection,
+.main-home-filterChipsSection.fzMaM8folMIckYG2,
+.main-home-filterChipsSectionActive,
+.main-home-filterChipsContainer,
+.main-home-filterChipsSection::after,
+.main-home-filterChipsSection.fzMaM8folMIckYG2::after {
+  background-color: var(--spice-main) !important;
+  background-image: none !important;
+  background: var(--spice-main) !important;
+  opacity: 1 !important;
+}
+
+/* Neutralizar mascaras y sombras en la barra de chips */
+.by5kq8SY2kEdu4km {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
 /* Eliminar degradados dinamicos de barras de accion y transiciones */
 .main-actionBarBackground-background,
 .main-actionBarBackground-gradient {
@@ -220,11 +239,11 @@
   border-color: var(--spice-button) !important;
 }
 
-/* Menus contextuales */
+/* Menus contextuales - Sombra ligera de baja dispersion */
 .main-contextMenu-menu {
   background-color: var(--spice-card) !important;
   border: 1px solid var(--spice-misc);
-  box-shadow: 0 4px 16px rgba(var(--spice-rgb-shadow), 0.35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;
   animation: contextMenuFadeIn 0.1s cubic-bezier(0, 0, 0.2, 1);
 }
 
