@@ -38,6 +38,16 @@
   /* Decorative Elements */
   --decorative-base: var(--spice-text) !important;
   --decorative-subdued: var(--spice-card) !important;
+
+  /* Escala global compacta (equivalente a zoom 90%) */
+  font-size: 88% !important;
+}
+
+/* Reduccion compacta de la interfaz principal */
+html,
+body,
+#main {
+  font-size: 13.5px !important;
 }
 
 /* -------------------------------------------------------------
@@ -107,7 +117,52 @@
 }
 
 /* -------------------------------------------------------------
-   3. Micro-Animaciones Ligeras y Fluidas (Hardware Accelerated)
+   3. Portadas Circulares (Circular Cover Art)
+   ------------------------------------------------------------- */
+
+/* Contenedores e imagenes de portadas redondeadas a 50% */
+.cover-art,
+.cover-art-image,
+.main-coverSlotCollapsed-container .cover-art-image,
+.main-coverArt-image,
+.main-card-image,
+.main-card-imageContainer,
+.main-entityHeader-image,
+.main-entityHeader-shadow,
+.main-trackList-rowImage,
+.main-nowPlayingWidget-coverArt .cover-art,
+.main-nowPlayingView-coverArt,
+.main-nowPlayingView-coverArtContainer,
+.main-nowPlayingView-coverArtContainer::after,
+.main-nowPlayingView-coverArtContainer::before {
+  border-radius: 50% !important;
+  clip-path: circle(50% at 50% 50%) !important;
+  overflow: hidden !important;
+}
+
+/* Ajuste de imagenes internas para relleno circular */
+.cover-art img,
+.main-card-imageContainer img,
+.main-entityHeader-image img,
+.main-nowPlayingWidget-coverArt img {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+
+/* Eliminar sombras cuadradas residuales detras de portadas */
+.main-entityHeader-shadow,
+.main-card-imageContainer {
+  box-shadow: none !important;
+}
+
+.main-nowPlayingView-coverArt,
+.main-nowPlayingWidget-coverArt {
+  box-shadow: none !important;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35)) !important;
+}
+
+/* -------------------------------------------------------------
+   4. Micro-Animaciones Ligeras y Fluidas (Hardware Accelerated)
    ------------------------------------------------------------- */
 
 /* Tarjetas: transicion rapida con sutil elevacion */
@@ -115,13 +170,19 @@
   background-color: var(--spice-card) !important;
   transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1), background-color 0.16s ease !important;
   will-change: transform;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .main-card-card:hover,
 .main-card-card[data-context-menu-open="true"] {
   background-color: var(--spice-main-secondary) !important;
   transform: translateY(-2px);
+}
+
+/* Rotacion sutil o escala al pasar el cursor sobre portada de tarjeta */
+.main-card-card:hover .main-card-imageContainer {
+  transform: scale(1.03);
+  transition: transform 0.2s ease !important;
 }
 
 /* Filas de listas de canciones con fade sutil */
