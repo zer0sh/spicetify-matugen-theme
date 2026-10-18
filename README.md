@@ -1,52 +1,51 @@
 # Spicetify Development
 
-Espacio de trabajo dedicado al desarrollo, personalizacion y mantenimiento de componentes para Spicetify en Spotify.
+Workspace dedicated to the development, customization and maintenance of Spicetify components for Spotify.
 
 ---
 
-## Estructura del Directorio
+## Directory Structure
 
-* `apps/`: Aplicaciones personalizadas (Custom Apps) integradas dentro del cliente de Spotify.
-* `extensions/`: Scripts y extensiones en JavaScript para anadir funciones y modificar comportamientos.
-* `themes/`: Temas personalizados, hojas de estilo CSS (`user.css`) y definiciones de color (`color.ini`).
-
----
-
-## Flujo de Trabajo con Spicetify CLI
-
-Para enlazar y probar los componentes desarrollados en este espacio con la configuracion activa de Spicetify (`~/.config/spicetify/`):
-
-### Enlace de Extensiones
-```bash
-ln -sf "$HOME/Workspace/personal/spicetify/extensions/<nombre-extension>.js" "$HOME/.config/spicetify/Extensions/"
-spicetify config extensions <nombre-extension>.js
-spicetify apply
-```
-
-### Enlace de Temas
-```bash
-ln -sfn "$HOME/Workspace/personal/spicetify/themes/<nombre-tema>" "$HOME/.config/spicetify/Themes/<nombre-tema>"
-spicetify config current_theme <nombre-tema>
-spicetify apply
-```
-
-### Enlace de Aplicaciones Personalizadas
-```bash
-ln -sfn "$HOME/Workspace/personal/spicetify/apps/<nombre-app>" "$HOME/.config/spicetify/CustomApps/<nombre-app>"
-spicetify config custom_apps <nombre-app>
-spicetify apply
-```
+* `apps/`: Custom Apps integrated into the Spotify client.
+* `extensions/`: JavaScript scripts and extensions that add features and modify behavior.
+* `themes/`: Custom themes, CSS stylesheets (`user.css`) and color definitions (`color.ini`).
 
 ---
 
-## Extensiones Disponibles
+## Spicetify CLI Workflow
+
+To link and test the components developed in this workspace with the active Spicetify configuration (`~/.config/spicetify/`):
+
+### Linking Extensions
+```bash
+ln -sf "$HOME/Workspace/personal/spicetify/extensions/<extension-name>.js" "$HOME/.config/spicetify/Extensions/"
+spicetify config extensions <extension-name>.js
+spicetify apply
+```
+
+### Linking Themes
+```bash
+ln -sfn "$HOME/Workspace/personal/spicetify/themes/<theme-name>" "$HOME/.config/spicetify/Themes/<theme-name>"
+spicetify config current_theme <theme-name>
+spicetify apply
+```
+
+### Linking Custom Apps
+```bash
+ln -sfn "$HOME/Workspace/personal/spicetify/apps/<app-name>" "$HOME/.config/spicetify/CustomApps/<app-name>"
+spicetify config custom_apps <app-name>
+spicetify apply
+```
+
+---
+
+## Available Extensions
 
 ### Topbar Actions (`extensions/topbar-actions.js`)
 
-* **Descripcion:** Reubica el boton de utilidad de Spicetify al lado derecho de la barra superior (`.main-actionButtons`) y le aplica un icono de llama personalizado.
-* **Caracteristicas:**
-  * Reubicacion automatica del boton de Spicetify (avisos de actualizacion y boton informativo persistente con modal de entorno).
-  * Icono SVG de llama propio para el boton de Spicetify.
-  * Observador de mutaciones para asegurar persistencia tras navegaciones internas en Spotify XPUI.
-* **Nota sobre Marketplace:** el acceso a la vista `/marketplace` lo inyecta nativamente Spicetify (`helper/spicetifyWrapper.js`, clase `custom-navlink`) para cada Custom App registrada, por lo que esta extension no gestiona ese boton.
-
+* **Description:** Relocates the Spicetify utility button to the right side of the top bar (`.main-actionButtons`) and applies a custom flame icon to it.
+* **Features:**
+  * Automatic relocation of the Spicetify button (update notices and persistent info button with an environment modal).
+  * Custom SVG flame icon for the Spicetify button.
+  * Mutation observer to ensure persistence after internal navigations in the Spotify XPUI.
+* **Marketplace note:** the `/marketplace` view is injected natively by Spicetify (`helper/spicetifyWrapper.js`, `custom-navlink` class) for every registered Custom App, so this extension does not manage that button.

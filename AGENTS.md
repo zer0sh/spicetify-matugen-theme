@@ -1,218 +1,219 @@
-# Contexto y Guia de Agentes: Desarrollo con Spicetify (AGENTS.md)
+# Agent Context and Guide: Development with Spicetify (AGENTS.md)
 
-Este documento establece la base tecnica, flujo de trabajo, convenciones de desarrollo y pautas de arquitectura para cualquier agente de IA o desarrollador que trabaje en extensiones, aplicaciones personalizadas (Custom Apps) y temas de Spotify dentro de este repositorio.
-
----
-
-## 1. Descripcion General y Objetivos
-
-El objetivo de este espacio es el desarrollo, prueba y distribucion de componentes personalizados para el cliente de escritorio de Spotify mediante **Spicetify CLI** y **Spicetify Creator**.
-
-* **Ruta del repositorio:** `~/Workspace/personal/spicetify/`
-* **Configuracion activa de Spicetify:** `~/.config/spicetify/`
-* **Binario de Spicetify:** `~/.spicetify/spicetify`
-* **Documentacion oficial de referencia:** [Spicetify Creator Basics](https://spicetify.app/docs/development/spicetify-creator/the-basics)
+This document establishes the technical foundation, workflow, development conventions and architecture guidelines for any AI agent or developer working on Spotify extensions, custom apps (Custom Apps) and themes within this repository.
 
 ---
 
-## 2. Herramientas y Runtimes
+## 1. Overview and Goals
 
-* **Runtimes de Node / JS:**
-  * `bun` (preferido para ejecucion rapida e instalacion de paquetes)
-  * `npm`, `yarn`, `pnpm` (disponibles segun compatibilidad con `create-spicetify-app`)
-* **Compilador (esbuild):**
-  * Spicetify Creator utiliza `esbuild` internamente para empaquetar TypeScript y React a JavaScript vanilla de alto rendimiento inyectable en Spotify.
-* **Preprocesadores de Estilos:**
-  * Soporte nativo para CSS, SCSS, Sass, PostCSS y CSS Modules (`*.module.css` / `*.module.scss`).
+The goal of this workspace is the development, testing and distribution of custom components for the Spotify desktop client through **Spicetify CLI** and **Spicetify Creator**.
+
+* **Repository path:** `~/Workspace/personal/spicetify/`
+* **Active Spicetify configuration:** `~/.config/spicetify/`
+* **Spicetify binary:** `~/.spicetify/spicetify`
+* **Official reference documentation:** [Spicetify Creator Basics](https://spicetify.app/docs/development/spicetify-creator/the-basics)
 
 ---
 
-## 3. Estructura de Directorios del Espacio
+## 2. Tools and Runtimes
+
+* **Node / JS Runtimes:**
+  * `bun` (preferred for fast execution and package installation)
+  * `npm`, `yarn`, `pnpm` (available depending on compatibility with `create-spicetify-app`)
+* **Bundler (esbuild):**
+  * Spicetify Creator uses `esbuild` internally to bundle TypeScript and React into high-performance vanilla JavaScript that can be injected into Spotify.
+* **Style Preprocessors:**
+  * Native support for CSS, SCSS, Sass, PostCSS and CSS Modules (`*.module.css` / `*.module.scss`).
+
+---
+
+## 3. Workspace Directory Structure
 
 ```text
 ~/Workspace/personal/spicetify/
-├── AGENTS.md        # Esta guia tecnica y contexto del agente
-├── README.md        # Descripcion general del repositorio
-├── apps/            # Aplicaciones personalizadas completas (Custom Apps con React)
-├── extensions/      # Scripts y extensiones en TypeScript/JavaScript
-└── themes/          # Hojas de estilo CSS y paletas de color (user.css, color.ini)
+├── AGENTS.md        # This technical guide and agent context
+├── README.md        # General repository description
+├── apps/            # Complete custom apps (Custom Apps with React)
+├── extensions/      # TypeScript/JavaScript scripts and extensions
+└── themes/          # CSS stylesheets and color palettes (user.css, color.ini)
 ```
 
 ---
 
-## 4. Spicetify Creator: Tipos de Proyectos y Creacion
+## 4. Spicetify Creator: Project Types and Creation
 
-### Inicializacion con `create-spicetify-app`
+### Project Scaffolding with `create-spicetify-app`
 
-Para generar un nuevo proyecto base interactivo dentro de `apps/` o `extensions/`:
+To generate a new interactive base project inside `apps/` or `extensions/`:
 
 ```bash
-# Con npm/npx
+# With npm/npx
 npx create-spicetify-app
 
-# Con yarn
+# With yarn
 yarn create spicetify-app
 
-# Con pnpm
+# With pnpm
 pnpm create spicetify-app
 ```
 
-El asistente solicita:
-1. Nombre del proyecto / directorio.
-2. Tipo de componente: `Extension` o `Custom App`.
-3. Opcion de generar codigo de ejemplo interactivo.
+The wizard asks for:
+1. Project / directory name.
+2. Component type: `Extension` or `Custom App`.
+3. Whether to generate interactive sample code.
 
 ---
 
-## 5. Arquitectura de Componentes
+## 5. Component Architecture
 
-### A. Extensiones (Scripts en Tiempo de Ejecucion)
+### A. Extensions (Runtime Scripts)
 
-Una extension se inyecta al iniciar Spotify y opera de fondo sobre la interfaz global.
+An extension is injected when Spotify starts and runs in the background over the global interface.
 
-* **Estructura tipica de proyecto (`extensions/<nombre>/`):**
-  * `src/app.tsx` o `src/app.ts`: Punto de entrada principal. Exporta una funcion o bloque asincrono ejecutado al inicio.
-  * `src/settings.json`: Archivo de configuracion minima:
+* **Typical project structure (`extensions/<name>/`):**
+  * `src/app.tsx` or `src/app.ts`: Main entry point. Exports a function or async block executed at startup.
+  * `src/settings.json`: Minimal configuration file:
     ```json
     {
-      "nameId": "mi-extension"
+      "nameId": "my-extension"
     }
     ```
-  * `src/types/`: Definiciones TypeScript y tipos globales de Spicetify.
+  * `src/types/`: TypeScript definitions and Spicetify global types.
 
-* **Patron obligatorio de inicializacion:**
-  Spotify carga asincronamente las APIs de Spicetify. Las extensiones deben esperar a que el objeto este disponible antes de invocar metodos:
+* **Mandatory initialization pattern:**
+  Spotify loads the Spicetify APIs asynchronously. Extensions must wait for the object to be available before invoking methods:
   ```typescript
   (async () => {
     while (!Spicetify?.showNotification) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
-    Spicetify.showNotification('Extension cargada correctamente');
+    Spicetify.showNotification('Extension loaded successfully');
   })();
   ```
 
-### B. Aplicaciones Personalizadas (Custom Apps)
+### B. Custom Apps
 
-Una Custom App es una aplicacion de una sola pagina (SPA) construida en React que se incrusta dentro de la navegacion principal de Spotify.
+A custom app is a single-page application (SPA) built with React that is embedded within Spotify's main navigation.
 
-* **Estructura tipica de proyecto (`apps/<nombre>/`):**
-  * `src/app.tsx`: Componente React principal exportado por defecto que se monta al entrar a la aplicacion.
-  * `src/settings.json`: Metadatos para la barra lateral de navegacion:
+* **Typical project structure (`apps/<name>/`):**
+  * `src/app.tsx`: Main React component exported by default, mounted when entering the application.
+  * `src/settings.json`: Metadata for the navigation sidebar:
     ```json
     {
-      "displayName": "Mi App",
-      "nameId": "mi-app",
+      "displayName": "My App",
+      "nameId": "my-app",
       "icon": "css/icon.svg",
       "activeIcon": "css/icon.svg"
     }
     ```
-  * `src/extensions/extension.tsx`: Extension secundaria asociada para escuchar eventos globales o registrar accesos directos.
-  * `src/css/`: Hojas de estilo modulares (`app.module.scss`) e iconos SVG.
+  * `src/extensions/extension.tsx`: Secondary extension used to listen to global events or register shortcuts.
+  * `src/css/`: Modular stylesheets (`app.module.scss`) and SVG icons.
 
-### C. Temas (`themes/`)
+### C. Themes (`themes/`)
 
-* Carpeta con `user.css` y opcionalmente `color.ini`.
-* Soporta reglas CSS para modificar la interfaz del reproductor, libreria, encabezados y paneles.
-* Compatible con variables de color inyectadas dinamicamente (ej. por generadores de temas o Matugen).
+* Folder containing `user.css` and optionally `color.ini`.
+* Supports CSS rules to modify the player interface, library, headers and panels.
+* Compatible with dynamically injected color variables (e.g. from theme generators or Matugen).
 
 ---
 
-## 6. Manejo de Estilos, Paquetes y Plugins
+## 6. Styles, Packages and Plugins Handling
 
-### Inyeccion de Estilos
-* **CSS / SCSS global:**
+### Style Injection
+* **Global CSS / SCSS:**
   ```typescript
-  import './estilos.css';
-  import './estilos.scss';
+  import './styles.css';
+  import './styles.scss';
   ```
-* **CSS Modules (evita colisiones de clases en el DOM de Spotify):**
+* **CSS Modules (avoids class name collisions in Spotify's DOM):**
   ```typescript
-  import styles from './componente.module.scss';
-  // Uso: <div className={styles.contenedor}>...</div>
+  import styles from './component.module.scss';
+  // Usage: <div className={styles.container}>...</div>
   ```
 
-### Paquetes de Node
-Cualquier paquete npm puede instalarse en el subproyecto y `esbuild` lo integrara en el bundle final:
+### Node Packages
+Any npm package can be installed in the subproject and `esbuild` will bundle it into the final output:
 ```bash
-bun add <paquete>
-# o npm install <paquete>
+bun add <package>
+# or npm install <package>
 ```
 
-### Plugins Oficiales de Spicetify Creator
-Los plugins oficiales siguen la convencion `spcr-<nombre>` (ej. `spcr-settings`, `spcr-navigation`):
+### Official Spicetify Creator Plugins
+Official plugins follow the `spcr-<name>` convention (e.g. `spcr-settings`, `spcr-navigation`):
 ```bash
 npm install spcr-settings
 ```
 
 ---
 
-## 7. Ciclo de Compilacion, Watch y Pruebas
+## 7. Build, Watch and Testing Cycle
 
-Dentro de la carpeta de cualquier proyecto de Spicetify Creator:
+Inside any Spicetify Creator project folder:
 
-### 1. Compilacion hacia Spicetify
+### 1. Build into Spicetify
 ```bash
 npm run build
-# Compila e instala automaticamente el bundle en ~/.config/spicetify/Extensions/ o CustomApps/
+# Bundles and automatically installs the output into ~/.config/spicetify/Extensions/ or CustomApps/
 ```
 
-### 2. Compilacion Local
+### 2. Local Build
 ```bash
 npm run build-local
-# Genera el output compilado en la carpeta ./dist/ local (util para commits e inspeccion)
+# Generates the bundled output in the local ./dist/ folder (useful for commits and inspection)
 ```
 
-### 3. Registro en Spicetify CLI
+### 3. Registration via Spicetify CLI
 ```bash
-# Para Extensiones
+# For Extensions
 spicetify config extensions <nameId>.js
 spicetify apply
 
-# Para Custom Apps
+# For Custom Apps
 spicetify config custom_apps <nameId>
 spicetify apply
 ```
 
-### 4. Modo Watch (Desarrollo en Vivo / Live Reload)
-1. En una terminal, iniciar el compilador en modo escucha:
+### 4. Watch Mode (Live Development / Live Reload)
+1. In one terminal, start the compiler in watch mode:
    ```bash
    npm run watch
    ```
-2. En otra terminal, iniciar Spotify en modo escucha reactiva:
+2. In another terminal, start Spotify in reactive watch mode:
    ```bash
-   # Para Extensiones
+   # For Extensions
    spicetify watch -le
 
-   # Para Custom Apps
+   # For Custom Apps
    spicetify watch -la
    ```
 
 ---
 
-## 8. Resumen de APIs de Spicetify
+## 8. Spicetify API Summary
 
-El entorno de Spotify expone globalmente `window.Spicetify` con utilidades avanzadas:
+The Spotify environment exposes `window.Spicetify` globally with advanced utilities:
 
-* `Spicetify.Player`: Control de reproduccion (`play()`, `pause()`, `next()`, eventos `addEventListener('songchange')`).
-* `Spicetify.Platform`: Acceso a `History` (navegacion por rutas SPA), CosmosAsync, cliente GraphQL.
-* `Spicetify.showNotification(mensaje)`: Banners nativos de notificacion.
-* `Spicetify.ContextMenu`: Registro de elementos en el menu click derecho de pistas, listas y artistas.
-* `Spicetify.Topbar`: Botones y menus anclados a la barra superior.
-* `Spicetify.ReactComponent` y `Spicetify.ReactHook`: Componentes internos de Spotify (Iconos, Tooltips, Sliders, Dialogos de confirmacion).
+* `Spicetify.Player`: Playback control (`play()`, `pause()`, `next()`, `addEventListener('songchange')` events).
+* `Spicetify.Platform`: Access to `History` (SPA route navigation), CosmosAsync, GraphQL client.
+* `Spicetify.showNotification(message)`: Native notification banners.
+* `Spicetify.ContextMenu`: Register items in the right-click menu of tracks, playlists and artists.
+* `Spicetify.Topbar`: Buttons and menus anchored to the top bar.
+* `Spicetify.ReactComponent` and `Spicetify.ReactHook`: Internal Spotify components (Icons, Tooltips, Sliders, Confirmation Dialogs).
 
 ---
 
-## 9. Reglas y Convenciones Obligatorias para Agentes
+## 9. Mandatory Rules and Conventions for Agents
 
-1. **Sin Emojis:**
-   * Prohibido estrictamente incluir emojis en archivos de codigo, archivos de configuracion, nombres de ramas, mensajes de commit o documentacion.
-2. **Idiomas:**
-   * Documentacion del repositorio y boveda de Obsidian: en espanol.
-   * Mensajes de commit y nombres de codigo/variables tecnicas: en ingles.
-3. **Commits Limpios:**
-   * Seguir Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`).
-4. **Seguridad y Respaldo:**
-   * Nunca modificar archivos binarios directos de Spotify sin que Spicetify haya generado su respaldo (`spicetify backup apply`).
-   * Para revertir cualquier falla en el cliente Spotify: `spicetify restore`.
-5. **Aislamiento de Dependencias:**
-   * Cada aplicacion o extension compleja debe mantener su propio `package.json` y `tsconfig.json` dentro de su subdirectorio en `apps/` o `extensions/`.
+1. **No Emojis:**
+   * Including emojis in source files, configuration files, branch names, commit messages or documentation is strictly prohibited.
+2. **Languages:**
+   * This repository is public: all repository documentation (README, AGENTS, theme docs) must be written in English.
+   * Obsidian vault documentation (`~/Workspace/vault/`): in Spanish.
+   * Commit messages and technical code/variable names: in English.
+3. **Clean Commits:**
+   * Follow Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`).
+4. **Safety and Backups:**
+   * Never modify Spotify's raw binary files unless Spicetify has generated its backup (`spicetify backup apply`).
+   * To revert any Spotify client failure: `spicetify restore`.
+5. **Dependency Isolation:**
+   * Each complex app or extension must keep its own `package.json` and `tsconfig.json` inside its subdirectory in `apps/` or `extensions/`.

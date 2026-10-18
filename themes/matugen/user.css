@@ -41,10 +41,10 @@
 }
 
 /* -------------------------------------------------------------
-   1. Ocultar Efectos Dinamicos y Degradados Pesados (Clean View)
+   1. Hide Dynamic Effects and Heavy Gradients (Clean View)
    ------------------------------------------------------------- */
 
-/* Eliminar fondos y degradados dinamicos de cabeceras de album/playlist */
+/* Remove dynamic backgrounds and gradients from album/playlist headers */
 .main-entityHeader-backgroundColor,
 .main-entityHeader-gradient,
 .main-entityHeader-overlay {
@@ -52,13 +52,13 @@
   background-image: none !important;
 }
 
-/* Eliminar degradados del Home detras de chips (All, Music, Podcasts) */
+/* Remove Home gradients behind chips (All, Music, Podcasts) */
 .main-home-homeHeader,
 .SvIjKUXqrWYDiWZA {
   display: none !important;
 }
 
-/* Forzar barra de chips al color plano de Matugen sin degradado dinamico */
+/* Force chips bar to flat Matugen color without dynamic gradient */
 .main-home-filterChipsSection,
 .main-home-filterChipsSection.fzMaM8folMIckYG2,
 .main-home-filterChipsSectionActive,
@@ -71,20 +71,20 @@
   opacity: 1 !important;
 }
 
-/* Neutralizar mascaras y sombras en la barra de chips */
+/* Neutralize masks and shadows on the chips bar */
 .by5kq8SY2kEdu4km {
   mask-image: none !important;
   -webkit-mask-image: none !important;
 }
 
-/* Eliminar degradados dinamicos de barras de accion y transiciones */
+/* Remove dynamic gradients from action bars and transitions */
 .main-actionBarBackground-background,
 .main-actionBarBackground-gradient {
   background-color: transparent !important;
   background-image: none !important;
 }
 
-/* Alinear contenedor de acciones (main-actionBar-ActionBar) al fondo limpio */
+/* Align action container (main-actionBar-ActionBar) to the clean background */
 .main-actionBar-ActionBar,
 .main-actionBar-ActionBar.contentSpacing,
 .main-actionBar-ActionBarContainer,
@@ -94,7 +94,7 @@ div[class*="main-actionBar-ActionBar"] {
   background: var(--spice-main) !important;
 }
 
-/* Eliminar velos y fades en secciones hijas del main view */
+/* Remove veils and fades on main view child sections */
 main > section > div,
 main > div > section > div,
 .main-view-container__scroll-node-child,
@@ -108,7 +108,7 @@ main > div > section > div,
   box-shadow: 0 1px 0 var(--spice-main-secondary) !important;
 }
 
-/* Eliminar degradados y washes en la vista principal y home */
+/* Remove gradients and washes on the main view and home */
 .main-home-background,
 .main-view-container__background,
 .main-trackList-background,
@@ -117,7 +117,7 @@ main > div > section > div,
   background-color: transparent !important;
 }
 
-/* Barra superior limpia sin blur ni degradados agresivos */
+/* Clean top bar without blur or aggressive gradients */
 .main-topBar-background {
   background-color: var(--spice-main) !important;
   background-image: none !important;
@@ -128,38 +128,38 @@ main > div > section > div,
 }
 
 /* -------------------------------------------------------------
-   2. Estructura y Superficies Base
+   2. Base Structure and Surfaces
    ------------------------------------------------------------- */
 
-/* Contenedor principal */
+/* Main container */
 .Root__top-container {
   background-color: var(--spice-main) !important;
   background-image: none !important;
 }
 
-/* Barras laterales de navegacion y biblioteca */
+/* Navigation and library sidebars */
 .Root__nav-bar,
 .main-yourLibraryX-entryPoints {
   background-color: var(--spice-sidebar) !important;
 }
 
-/* Barra de reproduccion inferior */
+/* Bottom playback bar */
 .Root__now-playing-bar,
 .main-nowPlayingBar-container {
   background-color: var(--spice-player) !important;
   border-top: 1px solid var(--spice-main-secondary);
 }
 
-/* Barra lateral derecha (Friend activity / Now playing) */
+/* Right sidebar (Friend activity / Now playing) */
 .Root__right-sidebar {
   background-color: var(--spice-sidebar) !important;
 }
 
 /* -------------------------------------------------------------
-   3. Micro-Animaciones Ligeras y Fluidas (Hardware Accelerated)
+   3. Light and Fluid Micro-Animations (Hardware Accelerated)
    ------------------------------------------------------------- */
 
-/* Tarjetas: transicion rapida con sutil elevacion */
+/* Cards: fast transition with subtle elevation */
 .main-card-card {
   background-color: var(--spice-card) !important;
   transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1), background-color 0.16s ease !important;
@@ -173,7 +173,7 @@ main > div > section > div,
   transform: translateY(-2px);
 }
 
-/* Filas de listas de canciones con fade sutil */
+/* Track list rows with subtle fade */
 .main-trackList-trackListRow {
   transition: background-color 0.12s ease !important;
   border-radius: 6px;
@@ -193,7 +193,7 @@ main > div > section > div,
   color: var(--spice-button) !important;
 }
 
-/* Boton de reproducir circular: escala elastica minima y fluida */
+/* Circular play button: minimal, fluid elastic scale */
 .main-playButton-PlayButton.main-playButton-primary,
 .main-playPauseButton-button {
   background-color: var(--spice-button) !important;
@@ -213,7 +213,7 @@ main > div > section > div,
   transform: scale(0.97);
 }
 
-/* Botones de accion y navegacion superior */
+/* Action and top navigation buttons */
 .main-topBar-button,
 .main-actionButtons button {
   color: var(--spice-subtext) !important;
@@ -231,7 +231,7 @@ main > div > section > div,
   color: var(--spice-button) !important;
 }
 
-/* Controles de la barra de reproduccion */
+/* Playback bar controls */
 .player-controls__buttons button {
   transition: transform 0.12s ease, color 0.12s ease !important;
 }
@@ -241,7 +241,7 @@ main > div > section > div,
   color: var(--spice-text) !important;
 }
 
-/* Barra de progreso y volumen */
+/* Progress and volume bars */
 .x-progressBar-fillColor {
   background-color: var(--spice-button) !important;
   transition: transform 0.1s linear;
@@ -251,7 +251,7 @@ main > div > section > div,
   background-color: var(--spice-button-disabled) !important;
 }
 
-/* Buscador de Spotify */
+/* Spotify search input */
 .x-searchInput-searchInputInput {
   background-color: var(--spice-card) !important;
   color: var(--spice-text) !important;
@@ -263,7 +263,7 @@ main > div > section > div,
   border-color: var(--spice-button) !important;
 }
 
-/* Menus contextuales - Sombra ligera de baja dispersion */
+/* Context menus - Light low-spread shadow */
 .main-contextMenu-menu {
   background-color: var(--spice-card) !important;
   border: 1px solid var(--spice-misc);
