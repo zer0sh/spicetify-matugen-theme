@@ -56,12 +56,30 @@ body,
    1. Ocultar Efectos Dinamicos y Degradados Pesados (Clean View)
    ------------------------------------------------------------- */
 
+/* Eliminar fondos y degradados en Home (main-home-content, contentSpacing) */
+.main-home-content,
+.main-home-content.contentSpacing,
+.main-home-content::before,
+.main-home-content::after,
+.contentSpacing,
+.contentSpacing::before,
+.contentSpacing::after,
+.main-home-homeHeader,
+.main-home-homeHeader::before,
+.main-home-homeHeader::after {
+  background-image: none !important;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
 /* Eliminar fondos y degradados dinamicos de cabeceras de album/playlist */
 .main-entityHeader-backgroundColor,
 .main-entityHeader-gradient,
-.main-entityHeader-overlay {
+.main-entityHeader-overlay,
+.main-userProfile-headerBackground {
   background-color: transparent !important;
   background-image: none !important;
+  background: transparent !important;
 }
 
 /* Eliminar degradados dinamicos de barras de accion y transiciones */
@@ -69,25 +87,40 @@ body,
 .main-actionBarBackground-gradient {
   background-color: transparent !important;
   background-image: none !important;
+  background: transparent !important;
 }
 
 /* Eliminar degradados y washes en la vista principal y home */
 .main-home-background,
 .main-view-container__background,
 .main-trackList-background,
+.main-trackList-gradientBackground,
+.main-view-container__scroll-node-child,
 .main-rootlist-rootlistDividerGradient {
   background-image: none !important;
   background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Regla general: bloquear todo pseudo-elemento que intente proyectar degradados */
+.main-home-content > div::before,
+.main-home-content > section::before,
+.main-entityHeader-container::after {
+  background-image: none !important;
+  background: transparent !important;
 }
 
 /* Barra superior limpia sin blur ni degradados agresivos */
 .main-topBar-background {
   background-color: var(--spice-main) !important;
   background-image: none !important;
+  background: var(--spice-main) !important;
 }
 
 .main-topBar-overlay {
   background-color: var(--spice-main) !important;
+  background-image: none !important;
+  background: var(--spice-main) !important;
 }
 
 /* -------------------------------------------------------------
