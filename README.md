@@ -43,10 +43,10 @@ spicetify apply
 
 ### Topbar Actions (`extensions/topbar-actions.js`)
 
-* **Descripcion:** Reubica los botones de utilidad de Spicetify a la derecha de la barra superior (`.main-actionButtons`) y restaura el icono oficial interactivo de Marketplace.
+* **Descripcion:** Reubica el boton de utilidad de Spicetify al lado derecho de la barra superior (`.main-actionButtons`) y le aplica un icono de llama personalizado.
 * **Caracteristicas:**
-  * Reubicacion automatica del boton de Spicetify (tanto para avisos de actualizacion como boton informativo persistente).
-  * Icono SVG de Marketplace que conmuta la ruta `/marketplace` con retorno inteligente (`goBack()`).
-  * Indicador de estado activo cuando se navega dentro del Marketplace.
+  * Reubicacion automatica del boton de Spicetify (avisos de actualizacion y boton informativo persistente con modal de entorno).
+  * Icono SVG de llama propio para el boton de Spicetify.
   * Observador de mutaciones para asegurar persistencia tras navegaciones internas en Spotify XPUI.
+* **Nota sobre Marketplace:** el acceso a la vista `/marketplace` lo inyecta nativamente Spicetify (`helper/spicetifyWrapper.js`, clase `custom-navlink`) para cada Custom App registrada, por lo que esta extension no gestiona ese boton.
 
